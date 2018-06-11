@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     //pin 객체 저장
     var annotations = [MKPointAnnotation]()
+    var count = 0
     
     
     override func viewDidLoad() {
@@ -42,12 +43,14 @@ class ViewController: UIViewController {
         //        anno02.title = "동의과학대학교"
         //        myMapView.addAnnotation(anno02)
         
-        let foodStoreAddress = [ "부산광역시 부산진구 양정1동 418-260",
-                                 "부산광역시 부산진구 양정동 350-1",
+        let foodStoreAddress = [ "부산광역시 부산진구 양정1동 350-1",
+                                 "부산광역시 부산진구 양정동 418-282",
                                  "부산광역시 부산진구 양정동 393-18",
                                  "부산광역시 부산진구 양정1동 356-22",
                                  "부산광역시 부산진구 양정1동 산19-8",
-                                 "부산광역시 부산진구 양정동 353-38"]
+                                 "부산광역시 부산진구 양정동 353-38",
+                                 "부산광역시 부산진구 양정동 429-19"]
+        var foodStoreNames = ["늘해랑","번개반점", "아딸", "왕짜장", "토마토도시락","동의과학대학교", "홍콩반점"]
         
         for addr in foodStoreAddress {
             let geoCoder = CLGeocoder()
@@ -64,11 +67,14 @@ class ViewController: UIViewController {
                     
                     let anno = MKPointAnnotation()
                     anno.coordinate = loc!
-                    anno.title = "wait!"
+                    anno.title = foodStoreNames[self.count]
+                    self.count = self.count + 1
                     anno.subtitle = addr
-                    //                    self.self.myMapView.addAnnotation(anno)
+                    //self.self.myMapView.addAnnotation(anno)
                     self.annotations.append(anno)
                     self.myMapView.addAnnotations(self.annotations)
+                    
+                    //여러개의 pin을 지도에 꽉채움
                     self.myMapView.showAnnotations(self.annotations, animated: true)
                     
                     
@@ -111,4 +117,3 @@ class ViewController: UIViewController {
         //    }
     }
 }
-
